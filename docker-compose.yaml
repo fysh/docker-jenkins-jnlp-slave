@@ -1,0 +1,14 @@
+jenkins_slave:
+  image: jenkins/jnlp-slave:latest-jdk11
+  container_name: jnlp_slave
+  restart: unless-stopped
+  user: root
+  environment:
+      JENKINS_URL: <jenkins url>
+      JENKINS_SECRET: <agent token>
+      JENKINS_AGENT_NAME: jnlp_slave
+      JENKINS_AGENT_WORKDIR: /var/jenkins_home
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/bin/docker:/usr/bin/docker
+    - ./jnlp_slave:/var/jenkins_home
